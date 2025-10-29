@@ -1,35 +1,10 @@
 {% load static %}
 <!DOCTYPE html>
 <html dir="rtl" lang="en">
+
     <head>
+        {% include 'head.html ' %}
 
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="keywords" content="Personal, Portfolio, Creative">
-        <meta name="description" content="Kalvin Portfolio Template">
-        <meta name="author" content="cosmos-themes">
-
-        <title>قالب تک صفحه ای رزومه و نمونه کار | نت کپی مرجع قالب و اسکریپت فارسی</title>
-
-        <!-- favicon -->
-        <link href="{% static 'images/favicon.ico' %}" rel="icon" type="image/png">
-
-        <!--Font Awesome css-->
-        <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
-
-        <!--Bootstrap css-->
-        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-
-        <!--Owl Carousel css-->
-        <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
-        <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
-
-        <!--Magnific Popup css-->
-        <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
-
-        <!--Site Main Style css-->
-        <link rel="stylesheet" href="{% static 'css/style.css' %}">
     </head>
 
     <body>
@@ -80,7 +55,7 @@
         <!--Navbar End-->
 
         <!--Home Section Start-->
-        <section id="home" class="banner banner-centered" style="background-image: url('images/background/creative2-banner-bg.jpg')" data-stellar-background-ratio=".7" data-scroll-index="0">
+        <section id="home" class="banner banner-centered" style="background-image: url('{% static 'images/background/creative2-banner-bg.jpg' %}')" data-stellar-background-ratio=".7" data-scroll-index="0">
                 <!--Banner Content-->
                 <div class="banner-caption">
                     <h1>سلام من نت کپی هستم</h1>
@@ -103,7 +78,7 @@
                     <div class="col-lg-5 col-md-6">
                         <!--About Image-->
                         <div class="about-img">
-                            <img src="images/about-img.jpg" alt="">
+                            <img src="{% static 'images/about-img.jpg' %}" alt="">
                         </div>
                     </div>
                     <div class="col-lg-7 col-md-6">
@@ -280,15 +255,17 @@
                     </div>
                 </div>
                 <div class="row portfolio-items">
-                    <!--Portfolio Item-->
-                    <div class="col-lg-4 col-md-6 item application">
+                {% for object in project %}
+
+                   <div class="col-lg-4 col-md-6 item application">
                         <div class="item-content">
-                            <img src="images/portfolio/img-1.jpg" alt="">
+                            <img src="{{object.image.url}}" alt="">
                             <div class="item-overlay">
-                                <h6>اپلیکیشن</h6>
+                                <h6>{{ object.title }}</h6>
+                                <p>{{ object.description }}</p>
                                 <div class="icons">
                                     <span class="icon link">
-                                        <a href="images/portfolio/img-1.jpg">
+                                        <a href="{{object.image.url}}">
                                             <i class="fa fa-search"></i>
                                         </a>
                                     </span>
@@ -296,88 +273,9 @@
                             </div>
                         </div>
                     </div>
-                    <!--Portfolio Item-->
-                    <div class="col-lg-4 col-md-6 item design">
-                        <div class="item-content">
-                            <img src="images/portfolio/img-2.jpg" alt="">
-                            <div class="item-overlay">
-                                <h6>طراحی وب</h6>
-                                <div class="icons">
-                                    <span class="icon link">
-                                        <a href="images/portfolio/img-2.jpg">
-                                            <i class="fa fa-search"></i>
-                                        </a>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Portfolio Item-->
-                    <div class="col-lg-4 col-md-6 item development">
-                        <div class="item-content">
-                            <img src="images/portfolio/img-3.jpg" alt="">
-                            <div class="item-overlay">
-                                <h6>اپلیکیشن</h6>
-                                <div class="icons">
-                                    <span class="icon link">
-                                        <a href="images/portfolio/img-3.jpg">
-                                            <i class="fa fa-search"></i>
-                                        </a>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Portfolio Item-->
-                    <div class="col-lg-4 col-md-6 item design development">
-                        <div class="item-content">
-                            <img src="images/portfolio/img-4.jpg" alt="">
-                            <div class="item-overlay">
-                                <h6>توسعه</h6>
-                                <div class="icons">
-                                    <span class="icon link">
-                                        <a href="images/portfolio/img-4.jpg">
-                                            <i class="fa fa-search"></i>
-                                        </a>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Portfolio Item-->
-                    <div class="col-lg-4 col-md-6 item development application">
-                        <div class="item-content">
-                            <img src="images/portfolio/img-5.jpg" alt="">
-                            <div class="item-overlay">
-                                <h6>طراحی وب</h6>
-                                <div class="icons">
-                                    <span class="icon link">
-                                        <a href="images/portfolio/img-5.jpg">
-                                            <i class="fa fa-search"></i>
-                                        </a>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Portfolio Item-->
-                    <div class="col-lg-4 col-md-6 item application development">
-                        <div class="item-content">
-                            <img src="images/portfolio/img-6.jpg" alt="">
-                            <div class="item-overlay">
-                                <h6>طراحی وب</h6>
-                                <div class="icons">
-                                    <span class="icon link">
-                                        <a href="images/portfolio/img-6.jpg">
-                                            <i class="fa fa-search"></i>
-                                        </a>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
+                    {% endfor %}
                 </div>
-            </div>
         </section>
         <!--Portfolio Section End-->
 
@@ -398,7 +296,7 @@
                         <div class="blog-item">
                             <div class="blog-img">
                                 <a href="single-blog.html">
-                                    <img src="images/blog/img-1.jpg" alt="">
+                                    <img src="{% static 'images/blog/img-1.jpg' %}" alt="">
                                 </a>
                             </div>
                             <div class="blog-content">
@@ -418,7 +316,7 @@
                         <div class="blog-item">
                             <div class="blog-img">
                                 <a href="single-blog.html">
-                                    <img src="images/blog/img-2.jpg" alt="">
+                                    <img src="{% static 'images/blog/img-2.jpg' %}" alt="">
                                 </a>
                             </div>
                             <div class="blog-content">
@@ -438,7 +336,7 @@
                         <div class="blog-item">
                             <div class="blog-img">
                                 <a href="single-blog.html">
-                                    <img src="images/blog/img-3.jpg" alt="">
+                                    <img src="{% static 'images/blog/img-3.jpg' %}" alt="">
                                 </a>
                             </div>
                             <div class="blog-content">
@@ -458,7 +356,7 @@
                         <div class="blog-item">
                             <div class="blog-img">
                                 <a href="single-blog.html">
-                                    <img src="images/blog/img-4.jpg" alt="">
+                                    <img src="{% static 'images/blog/img-4.jpg' %}" alt="">
                                 </a>
                             </div>
                             <div class="blog-content">
@@ -496,7 +394,7 @@
                             <!--Testimonials Item-->
                             <div class="testimonial-item">
                                 <div class="author-img">
-                                    <img src="images/testimonial/img-1.jpg" alt="">
+                                    <img src="{% static 'images/testimonial/img-1.jpg' %}" alt="">
                                 </div>
                                 <h5>آدام همتی</h5>
                                 <span>کارگردان خلاق</span>
@@ -505,7 +403,7 @@
                             <!--Testimonials Item-->
                             <div class="testimonial-item">
                                 <div class="author-img">
-                                    <img src="images/testimonial/img-1.jpg" alt="">
+                                    <img src="{% static 'images/testimonial/img-1.jpg' %}" alt="">
                                 </div>
                                 <h5>آدام همتی</h5>
                                 <span>کارگردان خلاق</span>
@@ -514,7 +412,7 @@
                             <!--Testimonials Item-->
                             <div class="testimonial-item">
                                 <div class="author-img">
-                                    <img src="images/testimonial/img-1.jpg" alt="">
+                                    <img src="{% static 'images/testimonial/img-1.jpg' %}" alt="">
                                 </div>
                                 <h5>آدام همتی</h5>
                                 <span>کارگردان خلاق</span>
@@ -611,25 +509,7 @@
         </footer>
         <!--Footer End-->
 
-        <!--Jquery js-->
-        <script src="js/jquery.min.js"></script>
-        <!--Bootstrap js-->
-        <script src="js/bootstrap.min.js"></script>
-        <!--Stellar js-->
-        <script src="js/jquery.stellar.js"></script>
-        <!--Animated Headline js-->
-        <script src="js/animated.headline.js"></script>
-        <!--Owl Carousel js-->
-        <script src="js/owl.carousel.min.js"></script>
-        <!--ScrollIt js-->
-        <script src="js/scrollIt.min.js"></script>
-        <!--Isotope js-->
-        <script src="js/isotope.pkgd.min.js"></script>
-        <!--Magnific Popup js-->
-        <script src="js/jquery.magnific-popup.min.js"></script>
-        <!--Site Main js-->
-        <script src="js/main.js"></script>
-
+   {% include 'scrips.html' %}
     </body>
 </html>
 

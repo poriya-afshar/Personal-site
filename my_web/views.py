@@ -1,7 +1,10 @@
 from django.shortcuts import render
+from project.models import Project
 
 
 def home(request):
-    return render(request,'index.html')
+    project = Project.objects.all()
+
+    return render(request,'index.html',context={'project':project})
 
 
