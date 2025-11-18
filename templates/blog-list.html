@@ -1,0 +1,91 @@
+{% load jformat %}
+{% load static %}
+
+<!DOCTYPE html>
+<html dir="rtl" lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>وبلاگ </title>
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="container">
+        <a href="{% url 'home' %}" class="navbar-brand">🏠 بازگشت به خانه</a>
+    </div>
+</nav>
+
+<!-- Banner -->
+<section class="banner">
+    <h1>وبلاگ </h1>
+    <p style="color: white; margin-top: 20px; font-size: 1.2rem;">جدیدترین مقالات و مطالب</p>
+</section>
+
+<!-- Blog List -->
+<section class="blog-section">
+    <div class="blog-list-container">
+        {% if posts %}
+            <div class="posts-grid">
+                {% for post in posts %}
+                    <article class="post-card">
+                        <a href="{% url 'blog_detail' slug=post.slug %}" class="post-link">
+                            {% if post.image %}
+                                <img src="{{ post.image.url }}" class="post-image" alt="{{ post.title }}">
+                            {% else %}
+                                <img src="{% static 'images/default-blog.jpg' %}" class="post-image"
+                                     alt="{{ post.title }}">
+                            {% endif %}
+
+                            <div class="post-content">
+                                <h3 class="post-title">{{ post.title }}</h3>
+
+                                <div class="post-meta">
+                                    <span >{{ post.created_at|jformat:"%d %B %Y - %H:%M" }}</span>
+                                    <span>✍️ {{ post.author }}</span>
+                                    <span>💬 {{ post.comments.count }} نظر</span>
+                                </div>
+
+                                <p class="post-excerpt">
+                                    {{ post.content|truncatewords:30 }}
+                                </p>
+
+                                <span class="read-more">ادامه مطلب ←</span>
+                            </div>
+                        </a>
+                    </article>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="no-posts">
+                <p>📝 هنوز پستی منتشر نشده است!</p>
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Footer -->
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-item">
+            <h5>ساخته شده توسط</h5>
+            <p>پوریا افشاری کیا</p>
+        </div>
+        <div class="footer-item">
+            <h5>تلفن</h5>
+            <p>{{ footer.phone }}</p>
+        </div>
+        <div class="footer-item">
+            <h5>ایمیل</h5>
+            <p>{{ footer.email }}</p>
+        </div>
+        <div class="footer-item">
+            <h5>آدرس</h5>
+            <p>{{ footer.address }}</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

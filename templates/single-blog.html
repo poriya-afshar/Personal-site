@@ -1,176 +1,136 @@
+{% load jformat %}
 {% load static %}
 
+
 <!DOCTYPE html>
+<html dir="rtl" lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ post.title }}</title>
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="container">
+        <a href="{% url 'home' %}" class="navbar-brand">🏠 بازگشت به خانه</a>
+    </div>
+</nav>
 
-<html dir="rtl" lang="en">
-    <head>
+<!-- Banner -->
+<section class="banner">
+    <h1>{{ post.title }}</h1>
+</section>
 
-        <title>وبلاگ</title>
-        {% include 'head.html ' %}
+<!-- Main Content -->
+<section class="blog-section">
+    <div class="blog-container">
+        <!-- Blog Post -->
+        <article class="blog-card">
+            {% if post.image %}
+                <img src="{{ post.image.url }}" class="blog-image" alt="{{ post.title }}">
+            {% else %}
+                <img src="{% static 'images/default-blog.jpg' %}" class="blog-image" alt="{{ post.title }}">
+            {% endif %}
 
-    </head>
+            <div class="blog-content">
+                <div class="blog-meta">
+                    <span >{{ post.created_at|jformat:"%d %B %Y - %H:%M" }}</span>
+                    <span>✍️ {{ post.author }}</span>
+                    <span>💬 {{ post.comments.count }} نظر</span>
+                </div>
 
-    <body>
+                <div class="blog-text">
+                    {{ post.content|linebreaks }}
+                </div>
+            </div>
+        </article>
 
-        <!--Preloader Start-->
-        <div class="preloader">
-            <div class="loader "></div>
+        <!-- Comments Section -->
+        <div class="comments-section">
+            <h3 class="section-title">نظرات ({{ post.comments.count }})</h3>
+
+            {% if post.comments.all %}
+                {% for comment in post.comments.all %}
+                    <div class="comment">
+                        <div class="comment-avatar-placeholder">
+                            {{ comment.name|first|upper }}
+                        </div>
+                        <div class="comment-content">
+                            <div class="comment-header">
+                                <span class="comment-author">{{ comment.name }}</span>
+                                <span class="comment-date">{{ comment.created_at|jformat:"%d %B %Y - %H:%M" }}</span>
+                            </div>
+                            <p class="comment-text">{{ comment.text }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="no-comments">
+                    <p>💭 هنوز نظری ثبت نشده است. اولین نفری باشید که نظر می‌دهد!</p>
+                </div>
+            {% endif %}
         </div>
-        <!--Preloader End-->
 
-        <!--Navbar Start-->
-        <nav class="navbar navbar-expand-lg navbar-dark">
-            <div class="container">
-                <!-- LOGO -->
-                <a class="navbar-brand logo" href="{% url 'home' %}">
-                    خانه
-                </a>
+        <!-- Comment Form -->
+        <div class="comment-form">
+            <h3 class="section-title">نظر خود را بنویسید</h3>
 
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-{#                        <a href="blogs-page.html" class="nav-link active">برگشت</a>#}
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <!--Navbar End-->
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
 
-        <section class="banner-blog">
-            <div id="particles-js"></div>
-            <!--Banner Caption-->
-            <div class="banner-caption text-center">
-                <h1>صفحه پست وبلاگ</h1>
-                <div class="bread-crumb mt-10">
-                    <a href="{% url 'home' %}">خانه</a>
-                    <a href="blogs-page.html">وبلاگ</a>
-                </div>
-            </div>
-        </section>
-
-        <section class="blog-detail pt-100 pb-100">
-            <div class="container">
-                <div class="row">
-                    <!--Blog Content-->
-                    <div class="col-lg-8 offset-lg-2">
-                        <!--Blog Image-->
-                        <div class="blog-image">
-                            <img src="{% static 'images/blog/blog-big.jpg' %}" alt="">
-                        </div>
-                        <!--Blog Heading-->
-                        <div class="blog-heading">
-                            <h2>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم </h2>
-                            <div class="blog-meta">
-                                <span class="date">22 مرداد 1400</span>
-                                <span class="by">توسط نت کپی</span>
-                            </div>
-                        </div>
-                        <!--Blog Content-->
-                        <div class="blog-content">
-                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد </p>
-                            <br>
-                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز </p>
-                            <blockquote>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز </blockquote>
-                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد </p>
-                        </div>
-                        <div class="col-md-12">
-                            <!--Blog Comments-->
-                            <h3 class="comment-title">نظرات</h3>
-                            <ul class="post-comment">
-                                <li>
-                                    <img src="{% static 'images/comment-authors/img-1.jpg' %}" alt="">
-                                    <div class="comment-info">
-                                        <h3>آدام همتی</h3>
-                                        <a href="#">پاسخ</a>
-                                        <span>22 مرداد 1400 15:40</span>
-                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است </p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <img src="{% static 'images/comment-authors/img-2.jpg' %}" alt="">
-                                    <div class="comment-info">
-                                          <h3>آدام همتی</h3>
-                                          <a href="#">پاسخ</a>
-                                          <span>22 مرداد 1400 15:40</span>
-                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است </p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <img src="{% static 'images/comment-authors/img-3.jpg' %}" alt="">
-                                    <div class="comment-info">
-                                          <h3>آدام همتی</h3>
-                                          <a href="#">پاسخ</a>
-                                          <span>22 مرداد 1400 15:40</span>
-                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است </p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <!--Blog Comment Form-->
-                        <form class="col-md-12 contact-form" action="#">
-                            <h3 class="comment-title">پاسخ دهید</h3>
-                            <div class="row">
-                                <!--Name-->
-                                <div class="col-md-6">
-                                    <input class="form-inpt" type="text" required="required" placeholder="نام">
-                                </div>
-                                <!--Email-->
-                                <div class="col-md-6">
-                                    <input class="form-inpt" type="text" placeholder="ایمیل" required="required">
-                                </div>
-                                <!--Message-->
-                                <div class="col-md-12">
-                                    <textarea name="form-message" placeholder="نظر شما" rows="8"></textarea>
-                                </div>
-                                <div class="col-md-12 text-center pt-30">
-                                    <input id="submit" class="main-btn" type="submit" value="ارسال نظر">
-                                </div>
-                            </div>
-                        </form>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group">
+                        <input type="text" name="name" class="form-input" placeholder="نام شما *" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" class="form-input" placeholder="ایمیل شما *" required>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!--Footer Start-->
-        <footer class="pt-50 pb-50">
-            <div class="container">
-                <div class="row text-center">
-                    <div class="col-md-3 col-sm-6">
-                        <!--Contant Item-->
-                        <div class="contact-info">
-                            <h5>نت کپی</h5>
-                            <p>لورم ایپسوم متن ساختگی </p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <!--Contant Item-->
-                        <div class="contact-info">
-                            <h5>تلفن</h5>
-                            <p>{{ footer.phone }}</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <!--Contant Item-->
-                        <div class="contact-info">
-                            <h5>ایمیل</h5>
-                            <p>{{ footer.email }}</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <!--Contant Item-->
-                        <div class="contact-info">
-                            <h5>آدرس</h5>
-                            <p>{{ footer.address }}</p>
-                        </div>
-                    </div>
+                <div class="form-group">
+                    <textarea name="text" class="form-input" placeholder="نظر شما... *" rows="6" required></textarea>
                 </div>
-            </div>
-        </footer>
-        <!--Footer End-->
+                <button class="submit-btn" type="submit">
+                    <span>ارسال نظر</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke-width="2" stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
 
-        <!--Jquery js-->
-  {% include 'scrips.html' %}
-    </body>
+<!-- Footer -->
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-item">
+            <h5>ساخته شده توسط</h5>
+            <p>پوریا افشاری کیا</p>
+        </div>
+        <div class="footer-item">
+            <h5>تلفن</h5>
+            <p>{{ footer.phone }}</p>
+        </div>
+        <div class="footer-item">
+            <h5>ایمیل</h5>
+            <p>{{ footer.email }}</p>
+        </div>
+        <div class="footer-item">
+            <h5>آدرس</h5>
+            <p>{{ footer.address }}</p>
+        </div>
+    </div>
+</footer>
+</body>
 </html>
-
-

@@ -4,7 +4,6 @@
 
 <head>
     {% include 'head.html ' %}
-
 </head>
 
 <body>
@@ -34,10 +33,7 @@
                     <a href="#" class="nav-link" data-scroll-nav="2">سرویس ها</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link" data-scroll-nav="3">نمونه کارها</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link" data-scroll-nav="4">وبلاگ</a>
+                    <a href="{% url 'blog_list' %}" class="nav-link" >وبلاگ</a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link" data-scroll-nav="5">تماس با من</a>
@@ -70,6 +66,7 @@
               d="M-0.2,0.5c0,0-21.7,99.6,233.1,99.6s320.1,199.7,467.6,200.1S898.6,100,1167.6,100S1401,0,1401,0v301H0 L-0.2,0.5z"/>
     </svg>
 </section>
+
 <!--Home Section End-->
 
 <!--About Section Start-->
@@ -89,15 +86,14 @@
                         <h2>درباره من</h2>
                     </div>
                     <p>
-                        سلام من پوریا هستم.برنامه نویس و فعال در حوزه نکنولوژی.
-                        یکی از علاقه های من تو دنیا این هستش که بتونم دانشم رو به دیگران انتقال بدم
-                        من زبان های مختلفی تو دنیایی برنامه نویسی کار میکنم
-                        ولی زبان های اصلی من پایتون و فریم ورک جنگو هستش
-                        همچنین من قابلیت برنامه نویسی با زبان جاوااسکریپت هم دارم
+                        من پوریا هستم؛ برنامه‌نویس و فعال در حوزه فناوری. به اشتراک‌گذاری دانش و کمک به رشد دیگران بخشی
+                        جدایی‌ناپذیر از مسیر حرفه‌ای من است. تخصص اصلی من توسعه با زبان Python و فریم‌ورک Django است و
+                        در کنار آن با JavaScript نیز تجربه عملی دارم. همیشه در حال یادگیری و علاقه‌مند به ساختن ابزارها
+                        و محصولاتی هستم که زندگی دیجیتال را ساده‌تر و کارآمدتر می‌کنند
                     </p>
 
                     <span class="about-button">
-                                <a class="main-btn" href="#">دانلود رزومه</a>
+                                <a class="main-btn" href="{% url 'resume' %}">مشاهده رزومه</a>
                             </span>
                 </div>
             </div>
@@ -112,75 +108,27 @@
         <div class="row">
             <div class="col">
                 <div class="heading text-center">
-                    <h6>سرویس ها</h6>
                     <h2>کاری که من می توانم انجام دهم</h2>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4">
-                <!--Service Item-->
-                <div class="service-item">
-                            <span class="icon">
-                                <i class="fa fa-laptop"></i>
-                            </span>
-                    <h4>طراحی وب</h4>
-                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است </p>
+            {% for task in tasks %}
+                <div class="col-md-4">
+                    <!--Service Item-->
+                    <div class="service-item">
+                    <span class="icon">
+                        <i class="{{ task.icon|default:'fa fa-cogs' }}"></i>
+                    </span>
+                        <h4>{{ task.title }}</h4>
+                        <p>{{ task.description }}</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <!--Service Item-->
-                <div class="service-item">
-                            <span class="icon">
-                                <i class="fa fa-gears"></i>
-                            </span>
-                    <h4>توسعه وب</h4>
-                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است </p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <!--Service Item-->
-                <div class="service-item">
-                            <span class="icon">
-                                <i class="fa fa-mobile"></i>
-                            </span>
-                    <h4>طراحی واکنش گرا</h4>
-                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است </p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <!--Service Item-->
-                <div class="service-item">
-                            <span class="icon">
-                                <i class="fa fa-rocket"></i>
-                            </span>
-                    <h4>برندسازی</h4>
-                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است </p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <!--Service Item-->
-                <div class="service-item">
-                            <span class="icon">
-                                <i class="fa fa-pencil"></i>
-                            </span>
-                    <h4>طراحی خلاقانه</h4>
-                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است </p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <!--Service Item-->
-                <div class="service-item">
-                            <span class="icon">
-                                <i class="fa fa-support"></i>
-                            </span>
-                    <h4>پشتیبانی</h4>
-                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است </p>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>
+
 <!--Services Section End-->
 
 <!--Stats Section Start-->
@@ -233,51 +181,8 @@
 <!--Stats Section End-->
 
 
-<!--Portfolio Section Start-->
-<section class="portfolio pt-100 pb-70" data-scroll-index="3">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="heading text-center">
-                    <h6>نمونه کارها</h6>
-                    <h2>کاری که انجام دادم</h2>
-                </div>
-                <div class="portfolio-filter text-center">
-                    <ul>
-                        <li class="sel-item" data-filter="*">همه</li>
-                        <li data-filter=".design">طراحی وب</li>
-                        <li data-filter=".application">اپلیکیشن</li>
-                        <li data-filter=".development">توسعه</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="row portfolio-items">
-            {% for object in project %}
-
-                <div class="col-lg-4 col-md-6 item application">
-                    <div class="item-content">
-                        <img src="{{ object.image.url }}" alt="">
-                        <div class="item-overlay">
-                            <h6>{{ object.title }}</h6>
-                            <p>{{ object.description }}</p>
-                            <div class="icons">
-                                    <span class="icon link">
-                                        <a href="{{ object.image.url }}">
-                                            <i class="fa fa-search"></i>
-                                        </a>
-                                    </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            {% endfor %}
-        </div>
-</section>
-<!--Portfolio Section End-->
-
 <!--Blog Section Start-->
+
 <section class="blogs pt-100 pb-100 bg-gray" data-scroll-index="4">
     <div class="container">
         <div class="row">
@@ -290,96 +195,43 @@
         </div>
         <div class="row">
             <div class="owl-carousel owl-theme">
-                <!--Blogs Item-->
-                <div class="blog-item">
-                    <div class="blog-img">
-                        <a href="{% url 'single-blog' %}">
-                            <img src="{% static 'images/blog/img-1.jpg' %}" alt="">
-                        </a>
-                    </div>
-                    <div class="blog-content">
-                        <h3>لورم ایپسوم متن ساختگی با تولید سادگی </h3>
-                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است
-                            چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است </p>
-                        <div class="blog-meta">
-                                    <span class="more">
-                                        <a href="{% url 'single-blog' %}">مطالعه بیشتر</a>
-                                    </span>
-                            <span class="date">
-                                        22 مرداد 1400
-                                    </span>
+                {% for post in latest_posts %}
+                    <!--Blog Item-->
+                    <div class="blog-item">
+                        <div class="blog-img">
+                            <a href="{% url 'blog_detail' slug=post.slug %}">
+                                {% if post.image %}
+                                    <img src="{{ post.image.url }}" alt="{{ post.title }}">
+                                {% else %}
+                                    <img src="{% static 'images/blog/default.jpg' %}" alt="{{ post.title }}">
+                                {% endif %}
+                            </a>
+                        </div>
+                        <div class="blog-content">
+                            <h3>{{ post.title }}</h3>
+                            <p>{{ post.content|truncatewords:20 }}</p>
+                            <div class="blog-meta">
+                                <span class="more">
+                                    <a href="{% url 'blog_detail' slug=post.slug %}">مطالعه بیشتر</a>
+                                </span>
+                                <span class="date">
+                                    {{ post.created_at|date:"d F Y" }}
+                                </span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!--Blogs Item-->
-                <div class="blog-item">
-                    <div class="blog-img">
-                        <a href="{% url 'single-blog' %}">
-                            <img src="{% static 'images/blog/img-2.jpg' %}" alt="">
-                        </a>
+                {% empty %}
+                    <!--اگر پستی نبود-->
+                    <div class="col-12 text-center">
+                        <p style="padding: 40px; color: #666;">هنوز پستی منتشر نشده است.</p>
                     </div>
-                    <div class="blog-content">
-                        <h3>لورم ایپسوم متن ساختگی با تولید سادگی </h3>
-                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است
-                            چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است </p>
-                        <div class="blog-meta">
-                                    <span class="more">
-                                        <a href="{% url 'single-blog' %}">مطالعه بیشتر</a>
-                                    </span>
-                            <span class="date">
-                                        22 مرداد 1400
-                                    </span>
-                        </div>
-                    </div>
-                </div>
-                <!--Blogs Item-->
-                <div class="blog-item">
-                    <div class="blog-img">
-                        <a href="{% url 'single-blog' %}">
-                            <img src="{% static 'images/blog/img-3.jpg' %}" alt="">
-                        </a>
-                    </div>
-                    <div class="blog-content">
-                        <h3>لورم ایپسوم متن ساختگی با تولید سادگی </h3>
-                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است
-                            چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است </p>
-                        <div class="blog-meta">
-                                    <span class="more">
-                                        <a href="{%  url 'single-blog' %}">مطالعه بیشتر</a>
-                                    </span>
-                            <span class="date">
-                                        22 مرداد 1400
-                                    </span>
-                        </div>
-                    </div>
-                </div>
-                <!--Blogs Item-->
-                <div class="blog-item">
-                    <div class="blog-img">
-                        <a href="{% url 'single-blog' %}">
-                            <img src="{% static 'images/blog/img-4.jpg' %}" alt="">
-                        </a>
-                    </div>
-                    <div class="blog-content">
-                        <h3>لورم ایپسوم متن ساختگی با تولید سادگی </h3>
-                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است
-                            چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است </p>
-                        <div class="blog-meta">
-                                    <span class="more">
-                                        <a href="{% url 'single-blog' %}">مطالعه بیشتر</a>
-                                    </span>
-                            <span class="date">
-                                        22 مرداد 1400
-                                    </span>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
         <div class="row">
             <div class="col text-center">
                 <div class="blog-button pt-40">
-                    {#                    <a class="main-btn" href="{% static 'HTML/single-blog.html' %}">مشاهده بیشتر</a>#}
+                    <a class="main-btn" href="{% url 'blog_list' %}">مشاهده همه</a>
                 </div>
             </div>
         </div>
@@ -392,19 +244,21 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-10 offset-lg-1">
-                <div class="owl-carousel owl-theme text-center">
-                    <!--Testimonials Item-->
+                <div class="owl-theme text-center">
+                    {#                    <!--Testimonials Item-->#}
                     <div class="testimonial-item">
                         <div class="author-img">
                             <img src="{% static 'images/my_photo.jpg' %}" alt="">
                         </div>
-                        <h5>آدام همتی</h5>
-                        <span>کارگردان خلاق</span>
-                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است
-                            چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی
-                            تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد </p>
+                        <h5>پوریا</h5>
+                        <span>برنامه نویس خلاق</span>
+                        <p>
+                            برنامه‌نویس خلاق فردی است که توانایی ترکیب دانش فنی با نگاهی نوآورانه را دارد و می‌تواند
+                            راه‌حل‌هایی کارآمد، منعطف و مقیاس‌پذیر برای پروژه‌های نرم‌افزاری ارائه دهد. این نقش نیازمند
+                            تسلط بر فناوری‌های روز، درک معماری‌های مدرن و توانایی طراحی و پیاده‌سازی سیستم‌هایی است که
+                            علاوه بر عملکرد مناسب، تجربه کاربری مطلوبی نیز ایجاد کنند
+                        </p>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -428,9 +282,11 @@
             <div class="col-lg-10 offset-lg-1">
                 <!--Contact Form-->
 
+
                 <form action="#" method="post">
                     {% csrf_token %}
                     <div class="container-lg border border-success">
+                    <br>
                         <div class="input-group mb-3">
                             <input type="text" name="name" class="form-control" placeholder="نام " aria-label="Username"
                                    aria-describedby="basic-addon1">
@@ -443,11 +299,13 @@
                         </div>
 
                         <div class="input-group">
-                                            <textarea class="form-control" name="massage" aria-label="With textarea"
-                                                      placeholder="چگونه میتوانم به شما کمک کنم؟"></textarea>
+                            <textarea class="form-control" name="massage" aria-label="With textarea"
+                                      placeholder="چگونه میتوانم به شما کمک کنم؟"></textarea>
                         </div>
                         <br>
                         <button type="submit" class="btn btn-success">ارسال پیام</button>
+                        <br>
+                        <br>
                     </div>
                 </form>
 
@@ -463,10 +321,11 @@
         <div class="row text-center">
             <div class="col-md-3 col-sm-6">
                 <!--Contant Item-->
-                {#                        <div class="contact-info">#}
-                {#                            <h5>نت کپی</h5>#}
-                {#                            <p>لورم ایپسوم متن ساختگی</p>#}
-                {#                        </div>#}
+                <div class="contact-info">
+                    <h5>ساخته شده توسط</h5>
+                    <p>پوریا افشاری کیا</p>
+                </div>
+
             </div>
             <div class="col-md-3 col-sm-6">
                 <!--Contant Item-->

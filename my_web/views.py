@@ -1,6 +1,8 @@
 from django.shortcuts import render
-from project.models import Project
-from footer.models import Footer,Form
+from footer.models import Footer, Form
+from my_resume.models import SiteInfo, Skill, Experience, Project, Education
+from blog.models import BlogPost
+from Task.models import Task
 
 
 def home(request):
@@ -10,11 +12,33 @@ def home(request):
         massage = request.POST.get("massage")
         Form.objects.create(name=name, email=email, massage=massage)
 
-    project = Project.objects.all()
+    tasks = Task.objects.all()
     footer = Footer.objects.all().last()
-    return render(request,'index.html',context={'project':project,'footer':footer})
+    latest_posts = BlogPost.objects.all().order_by('-created_at')[:4]
+    context = {
+        'footer': footer,
+        'latest_posts': latest_posts,
+        'tasks': tasks,
+    }
+    return render(request, 'index.html', context)
 
 
 def single_blog(request):
     footer = Footer.objects.all().last()
-    return render(request, 'single-blog.html',context={'footer':footer})
+    return render(request, 'single-blog.html', context={'footer': footer})
+
+
+def resume(request):
+    site_info = SiteInfo.objects.first()
+    skills = Skill.objects.all()
+    experiences = Experience.objects.all()
+    projects = Project.objects.all()
+    educations = Education.objects.all()
+    context = {
+        'site': site_info,
+        'skills': skills,
+        'experiences': experiences,
+        'projects': projects,
+        'educations': educations,
+    }
+    return render(request, 'my_resume.html', context)
