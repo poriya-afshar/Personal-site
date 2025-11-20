@@ -1,6 +1,143 @@
+{#{% load jformat %}#}
+{#{% load static %}#}
+{##}
+{##}
+{#<!DOCTYPE html>#}
+{#<html dir="rtl" lang="fa">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+{#    <title>{{ post.title }}</title>#}
+{#    <link rel="stylesheet" href="{% static 'css/blog.css' %}">#}
+{#</head>#}
+{#<body>#}
+{#<!-- Navbar -->#}
+{#<nav class="navbar">#}
+{#    <div class="container">#}
+{#        <a href="{% url 'home' %}" class="navbar-brand">🏠 بازگشت به خانه</a>#}
+{#    </div>#}
+{#</nav>#}
+{##}
+{#<!-- Banner -->#}
+{#<section class="banner">#}
+{#    <h1>{{ post.title }}</h1>#}
+{#</section>#}
+{##}
+{#<!-- Main Content -->#}
+{#<section class="blog-section">#}
+{#    <div class="blog-container">#}
+{#        <!-- Blog Post -->#}
+{#        <article class="blog-card">#}
+{#            {% if post.image %}#}
+{#                <img src="{{ post.image.url }}" class="blog-image" alt="{{ post.title }}">#}
+{#            {% else %}#}
+{#                <img src="{% static 'images/default-blog.jpg' %}" class="blog-image" alt="{{ post.title }}">#}
+{#            {% endif %}#}
+{##}
+{#            <div class="blog-content">#}
+{#                <div class="blog-meta">#}
+{#                    <span >{{ post.created_at|jformat:"%d %B %Y - %H:%M" }}</span>#}
+{#                    <span>✍️ {{ post.author }}</span>#}
+{#                    <span>💬 {{ post.comments.count }} نظر</span>#}
+{#                </div>#}
+{##}
+{#                <div class="blog-text">#}
+{#                    {{ post.content|linebreaks }}#}
+{#                </div>#}
+{#            </div>#}
+{#        </article>#}
+{##}
+{#        <!-- Comments Section -->#}
+{#        <div class="comments-section">#}
+{#            <h3 class="section-title">نظرات ({{ post.comments.count }})</h3>#}
+{##}
+{#            {% if post.comments.all %}#}
+{#                {% for comment in post.comments.all %}#}
+{#                    <div class="comment">#}
+{#                        <div class="comment-avatar-placeholder">#}
+{#                            {{ comment.name|first|upper }}#}
+{#                        </div>#}
+{#                        <div class="comment-content">#}
+{#                            <div class="comment-header">#}
+{#                                <span class="comment-author">{{ comment.name }}</span>#}
+{#                                <span class="comment-date">{{ comment.created_at|jformat:"%d %B %Y - %H:%M" }}</span>#}
+{#                            </div>#}
+{#                            <p class="comment-text">{{ comment.text }}</p>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                {% endfor %}#}
+{#            {% else %}#}
+{#                <div class="no-comments">#}
+{#                    <p>💭 هنوز نظری ثبت نشده است. اولین نفری باشید که نظر می‌دهد!</p>#}
+{#                </div>#}
+{#            {% endif %}#}
+{#        </div>#}
+{##}
+{#        <!-- Comment Form -->#}
+{#        <div class="comment-form">#}
+{#            <h3 class="section-title">نظر خود را بنویسید</h3>#}
+{##}
+{#            {% if messages %}#}
+{#                {% for message in messages %}#}
+{#                    <div class="alert alert-{{ message.tags }}">#}
+{#                        {{ message }}#}
+{#                    </div>#}
+{#                {% endfor %}#}
+{#            {% endif %}#}
+{##}
+{#            <form method="POST">#}
+{#                {% csrf_token %}#}
+{#                <div class="form-row">#}
+{#                    <div class="form-group">#}
+{#                        <input type="text" name="name" class="form-input" placeholder="نام شما *" required>#}
+{#                    </div>#}
+{#                    <div class="form-group">#}
+{#                        <input type="email" name="email" class="form-input" placeholder="ایمیل شما *" required>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="form-group">#}
+{#                    <textarea name="text" class="form-input" placeholder="نظر شما... *" rows="6" required></textarea>#}
+{#                </div>#}
+{#                <button class="submit-btn" type="submit">#}
+{#                    <span>ارسال نظر</span>#}
+{#                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">#}
+{#                        <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke-width="2" stroke-linecap="round"#}
+{#                              stroke-linejoin="round"/>#}
+{#                    </svg>#}
+{#                </button>#}
+{#            </form>#}
+{#        </div>#}
+{#    </div>#}
+{#</section>#}
+{##}
+{#<!-- Footer -->#}
+{##}
+{#<footer>#}
+{#    <div class="footer-content">#}
+{#        <div class="footer-item">#}
+{#            <h5>ساخته شده توسط</h5>#}
+{#            <p>پوریا افشاری کیا</p>#}
+{#        </div>#}
+{#        <div class="footer-item">#}
+{#            <h5>تلفن</h5>#}
+{#            <p>{{ footer.phone }}</p>#}
+{#        </div>#}
+{#        <div class="footer-item">#}
+{#            <h5>ایمیل</h5>#}
+{#            <p>{{ footer.email }}</p>#}
+{#        </div>#}
+{#        <div class="footer-item">#}
+{#            <h5>آدرس</h5>#}
+{#            <p>{{ footer.address }}</p>#}
+{#        </div>#}
+{#    </div>#}
+{#</footer>#}
+{#</body>#}
+{#</html>#}
+
+
 {% load jformat %}
 {% load static %}
-
 
 <!DOCTYPE html>
 <html dir="rtl" lang="fa">
@@ -11,22 +148,18 @@
     <link rel="stylesheet" href="{% static 'css/blog.css' %}">
 </head>
 <body>
-<!-- Navbar -->
 <nav class="navbar">
     <div class="container">
         <a href="{% url 'home' %}" class="navbar-brand">🏠 بازگشت به خانه</a>
     </div>
 </nav>
 
-<!-- Banner -->
 <section class="banner">
     <h1>{{ post.title }}</h1>
 </section>
 
-<!-- Main Content -->
 <section class="blog-section">
     <div class="blog-container">
-        <!-- Blog Post -->
         <article class="blog-card">
             {% if post.image %}
                 <img src="{{ post.image.url }}" class="blog-image" alt="{{ post.title }}">
@@ -36,7 +169,7 @@
 
             <div class="blog-content">
                 <div class="blog-meta">
-                    <span >{{ post.created_at|jformat:"%d %B %Y - %H:%M" }}</span>
+                    <span>{{ post.created_at|jformat:"%d %B %Y - %H:%M" }}</span>
                     <span>✍️ {{ post.author }}</span>
                     <span>💬 {{ post.comments.count }} نظر</span>
                 </div>
@@ -47,24 +180,71 @@
             </div>
         </article>
 
-        <!-- Comments Section -->
         <div class="comments-section">
             <h3 class="section-title">نظرات ({{ post.comments.count }})</h3>
 
-            {% if post.comments.all %}
-                {% for comment in post.comments.all %}
-                    <div class="comment">
+            {% if comments %}
+                {% for comment in comments %}
+                    <div class="comment" id="comment-{{ comment.id }}">
                         <div class="comment-avatar-placeholder">
                             {{ comment.name|first|upper }}
                         </div>
-                        <div class="comment-content">
+                        <div class="comment-content" style="width: 100%;">
                             <div class="comment-header">
                                 <span class="comment-author">{{ comment.name }}</span>
                                 <span class="comment-date">{{ comment.created_at|jformat:"%d %B %Y - %H:%M" }}</span>
                             </div>
                             <p class="comment-text">{{ comment.text }}</p>
+
+                            <button class="btn-reply" onclick="toggleReplyForm('{{ comment.id }}')">
+                                ↩ پاسخ دادن
+                            </button>
+
+                            <div id="reply-form-{{ comment.id }}" class="reply-form-container">
+                                <h5>پاسخ به {{ comment.name }}:</h5>
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="parent_id" value="{{ comment.id }}">
+
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <input type="text" name="name" class="form-input" placeholder="نام شما *"
+                                                   required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="email" name="email" class="form-input"
+                                                   placeholder="ایمیل شما *" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea name="text" class="form-input" placeholder="پاسخ خود را بنویسید..."
+                                                  rows="3" required></textarea>
+                                    </div>
+                                    <button class="submit-btn" type="submit"
+                                            style="padding: 8px 20px; font-size: 0.9rem;">
+                                        ارسال پاسخ
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
+
+                    {% for reply in comment.replies.all %}
+                        <div class="comment reply-child">
+                            <div class="comment-avatar-placeholder"
+                                 style="background: #888; width: 40px; height: 40px; font-size: 1rem;">
+                                {{ reply.name|first|upper }}
+                            </div>
+                            <div class="comment-content">
+                                <div class="comment-header">
+                                    <span class="comment-author">{{ reply.name }}</span>
+                                    <span class="comment-date">{{ reply.created_at|jformat:"%d %B %Y - %H:%M" }}</span>
+                                </div>
+                                <p class="comment-text">{{ reply.text }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+
                 {% endfor %}
             {% else %}
                 <div class="no-comments">
@@ -73,9 +253,8 @@
             {% endif %}
         </div>
 
-        <!-- Comment Form -->
-        <div class="comment-form">
-            <h3 class="section-title">نظر خود را بنویسید</h3>
+        <div class="comment-form" style="margin-top: 50px;">
+            <h3 class="section-title">نظر جدید بنویسید</h3>
 
             {% if messages %}
                 {% for message in messages %}
@@ -110,8 +289,6 @@
     </div>
 </section>
 
-<!-- Footer -->
-
 <footer>
     <div class="footer-content">
         <div class="footer-item">
@@ -132,5 +309,8 @@
         </div>
     </div>
 </footer>
+
+{% include 'scrips.html' %}
+
 </body>
 </html>

@@ -50,8 +50,35 @@ class BlogPost(models.Model):
         return self.title
 
 
+# class Comment(models.Model):
+#     post = models.ForeignKey(BlogPost, related_name="comments", on_delete=models.CASCADE)
+#     name = models.CharField(max_length=100, verbose_name="نام")
+#     email = models.EmailField(verbose_name="ایمیل")
+#     text = models.TextField(verbose_name="متن نظر")
+#     created_at = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ایجاد")
+#
+#     class Meta:
+#         verbose_name = "نظر"
+#         verbose_name_plural = "نظرات"
+#         ordering = ['-created_at']
+#
+#     def __str__(self):
+#         return f"{self.name} - {self.post.title}"
+
+
+
 class Comment(models.Model):
     post = models.ForeignKey(BlogPost, related_name="comments", on_delete=models.CASCADE)
+
+    # ⬅️ این فیلد جدید اضافه شده
+    parent = models.ForeignKey(
+        "self",
+        null=True,
+        blank=True,
+        related_name="replies",
+        on_delete=models.CASCADE
+    )
+
     name = models.CharField(max_length=100, verbose_name="نام")
     email = models.EmailField(verbose_name="ایمیل")
     text = models.TextField(verbose_name="متن نظر")
@@ -60,7 +87,11 @@ class Comment(models.Model):
     class Meta:
         verbose_name = "نظر"
         verbose_name_plural = "نظرات"
-        ordering = ['-created_at']
+        ordering = ['created_at']  # ترتیب از قدیم به جدید تا ریپلای درست بیاد
 
     def __str__(self):
         return f"{self.name} - {self.post.title}"
+
+    @property
+    def is_reply(self):
+        return self.parent is not None

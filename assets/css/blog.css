@@ -534,3 +534,42 @@ footer {
         font-size: 1.3rem;
     }
 }
+
+/*------------------------*/
+
+
+/* استایل پاسخ‌ها (فرزندان) با فاصله از سمت راست */
+.reply-child {
+    margin-right: 50px;
+    border-right: 3px solid #e1e1e1;
+    padding-right: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px 0 0 8px;
+}
+
+/* دکمه پاسخ */
+.btn-reply {
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn-reply:hover {
+    text-decoration: underline;
+}
+
+/* فرم مخفی پاسخ */
+.reply-form-container {
+    display: none; /* پیش‌فرض مخفی */
+    margin-top: 15px;
+    margin-right: 20px;
+    padding: 15px;
+    background: #f1f1f1;
+    border-radius: 8px;
+}
